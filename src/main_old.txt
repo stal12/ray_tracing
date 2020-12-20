@@ -1,0 +1,130 @@
+
+
+
+
+    // @mem(data, FLOAT64, 3, image_width, image_height, image_width * 3 * 8)
+    
+    //color* data;
+    //data = new color[image_width * image_height];
+    //int i = 0;
+    //for (int r = image_height - 1; r >= 0; --r) {
+    //    for (int c = 0; c < image_width; ++c) {
+    //        
+    //        // Anti-Aliasing with random sampling
+    //        //color pixel_color(0, 0, 0);
+    //        //for (int s = 0; s < samples_per_pixel; ++s) {
+    //        //    auto u = (c + random_double()) / (image_width - 1);
+    //        //    auto v = (r + random_double()) / (image_height - 1);
+    //        //    ray ra = cam.get_ray(u, v);
+    //        //    pixel_color += ray_color(ra, world);
+    //        //}         
+
+    //        // Anti-Aliasing with regular grid
+    //        const int samples_per_axis = 4;
+    //        const double delta = 1.0 / samples_per_axis;
+    //        color pixel_color(0, 0, 0);
+    //        for (int aar = 0; aar < samples_per_axis; ++aar) {
+    //            for (int aac = 0; aac < samples_per_axis; ++aac) {
+    //                const double u = (c - 0.5 + delta / 2 + delta * aac) / (image_width - 1);
+    //                const double v = (r - 0.5 + delta / 2 + delta * aar) / (image_height - 1);
+    //                ray ra = cam.get_ray(u, v);
+    //                pixel_color += ray_color(ra, world, max_depth);
+    //            }
+    //        }
+    //        pixel_color /= (samples_per_axis * samples_per_axis);
+
+    //        data[i++] = BGR(pixel_color);
+    //    }
+    //}
+
+    //delete[] data;
+    
+    
+    //class cuboid : public hittable {
+//public:
+//    cuboid(point3 center, double width, double height, double depth, shared_ptr<material> m)
+//        : center(center), width(width), height(height), depth(depth), mat_ptr(m) {};
+//
+//    virtual bool hit(const ray& r, double t_min, double t_max, hit_record& rec) const override;
+//
+//public:
+//    point3 center;
+//    double width;
+//    double height;
+//    double depth;
+//    shared_ptr<material> mat_ptr;
+//};
+//
+//
+//bool cuboid::hit(const ray& r, double t_min, double t_max, hit_record& rec) const {
+//
+//    double txmin = -infinity;
+//    double txmax = infinity;
+//    double tymin = -infinity;
+//    double tymax = infinity;
+//    double tzmin = -infinity;
+//    double tzmax = infinity;
+//
+//    if (r.direction().x() != 0) {
+//        txmin = (center.x() - width / 2 - r.origin().x()) / r.direction().x();
+//        txmax = (center.x() + width / 2 - r.origin().x()) / r.direction().x();
+//    }
+//
+//    if (r.direction().y() != 0) {
+//        tymin = (center.y() - height / 2 - r.origin().y()) / r.direction().y();
+//        tymax = (center.y() + height / 2 - r.origin().y()) / r.direction().y();
+//    }
+//
+//    if (r.direction().z() != 0) {
+//        tzmin = (center.z() - depth / 2 - r.origin().z()) / r.direction().z();
+//        tzmax = (center.z() + depth / 2 - r.origin().z()) / r.direction().z();
+//    }
+//
+//    const double txenter = std::min(txmin, txmax);
+//    const double tyenter = std::min(tymin, tymax);
+//    const double tzenter = std::min(tzmin, tzmax);
+//    const double tenter = std::max(std::max(txenter, tyenter), tzenter);
+//
+//    const double txexit = std::max(txmin, txmax);
+//    const double tyexit = std::max(tymin, tymax);
+//    const double tzexit = std::max(tzmin, tzmax);
+//    const double texit = std::min(std::min(txexit, tyexit), tzexit);
+//
+//    if (tenter >= texit)
+//        return false;
+//    
+//    double t = tenter;
+//    if (t < t_min || t > t_max) {
+//        t = texit;
+//        if (t < t_min || t > t_max) {
+//            return false;
+//        }
+//    }
+//
+//    rec.t = t;
+//    const point3 p = r.at(rec.t);
+//    rec.p = p;
+//
+//    vec3 outward_normal;
+//    constexpr double thresh = 0.00001;
+//    if (fabs(center.x() - width / 2 - p.x()) < thresh)
+//        outward_normal = vec3(-1.0, 0.0, 0.0);
+//    else if (fabs(center.x() + width / 2 - p.x()) < thresh)
+//        outward_normal = vec3(+1.0, 0.0, 0.0);
+//    else if (fabs(center.y() - height / 2 - p.y()) < thresh)
+//        outward_normal = vec3(0.0, -1.0, 0.0);
+//    else if (fabs(center.y() + height / 2 - p.y()) < thresh)
+//        outward_normal = vec3(0.0, +1.0, 0.0);
+//    else if (fabs(center.z() - depth / 2 - p.z()) < thresh)
+//        outward_normal = vec3(0.0, 0.0, -1.0);
+//    else if (fabs(center.z() + depth / 2 - p.z()) < thresh)
+//        outward_normal = vec3(0.0, 0.0, +1.0);
+//    else
+//        return false;
+//
+//    rec.set_face_normal(r, outward_normal);
+//    rec.mat_ptr = mat_ptr;
+//
+//    return true;
+//}
+//
