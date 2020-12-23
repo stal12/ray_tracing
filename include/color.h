@@ -2,6 +2,7 @@
 #define COLOR_H
 
 #include "vec3.h"
+#include "utility.h"
 
 #include <iostream>
 
@@ -12,9 +13,9 @@ void write_color(std::ostream& out, color pixel_color, int samples_per_pixel) {
 
     // Divide the color by the number of samples and gamma-correct for gamma=2.2.
     auto scale = 1.0 / samples_per_pixel;
-    r = pow(scale * r, 1 / 2.2);
-    g = pow(scale * g, 1 / 2.2);
-    b = pow(scale * b, 1 / 2.2);
+    r = pow(scale * r, 1.0 / gamma);
+    g = pow(scale * g, 1.0 / gamma);
+    b = pow(scale * b, 1.0 / gamma);
 
     // Write the translated [0,255] value of each color component.
     out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << ' '

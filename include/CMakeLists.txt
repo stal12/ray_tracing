@@ -11,4 +11,10 @@ target_sources(RayTracing PRIVATE
     material.h
     aabb.h
     bvh.h
+    texture.h
+    perlin.h
+    my_stb_image.h
+    aarect.h
+    box.h
+    constant_medium.h
 )
