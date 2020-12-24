@@ -234,25 +234,25 @@ hittable_list final_scene() {
     objects.add(make_shared<sphere>(
         point3(0, 150, 145), 50, make_shared<metal>(color(0.8, 0.8, 0.9), 1.0)
         ));
-
+    
     auto boundary = make_shared<sphere>(point3(360, 150, 145), 70, make_shared<dielectric>(1.5));
     objects.add(boundary);
     objects.add(make_shared<constant_medium>(boundary, 0.2, color(0.2, 0.4, 0.9)));
     boundary = make_shared<sphere>(point3(0, 0, 0), 5000, make_shared<dielectric>(1.5));
-    objects.add(make_shared<constant_medium>(boundary, .0001, color(1, 1, 1)));
-
+    //objects.add(make_shared<constant_medium>(boundary, .0001, color(1, 1, 1)));
+    
     auto emat = make_shared<lambertian>(make_shared<image_texture>("earthmap.jpg"));
     objects.add(make_shared<sphere>(point3(400, 200, 400), 100, emat));
-    auto pertext = make_shared<noise_texture>(0.1);
+    auto pertext = make_shared<marble_texture>(0.1, 7);
     objects.add(make_shared<sphere>(point3(220, 280, 300), 80, make_shared<lambertian>(pertext)));
-
+    
     hittable_list boxes2;
     auto white = make_shared<lambertian>(color(.73, .73, .73));
     int ns = 1000;
     for (int j = 0; j < ns; j++) {
         boxes2.add(make_shared<sphere>(point3::random(0, 165), 10, white));
     }
-
+    
     objects.add(make_shared<translate>(
         make_shared<rotate_y>(
             make_shared<bvh_node>(boxes2, 0.0, 1.0), 15),
@@ -352,8 +352,8 @@ int main(void) {
         world = final_scene();
         aspect_ratio = 1.0;
         image_width = 400;
-        samples_per_pixel = 10;
-        background = color(0, 0, 0);
+        samples_per_pixel = 100;
+        background = color(0.0, 0.0, 0.0);
         lookfrom = point3(478, 278, -600);
         lookat = point3(278, 278, 0);
         vfov = 40.0;

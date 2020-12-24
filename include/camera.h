@@ -32,7 +32,11 @@ public:
         vec3 rd = lens_radius * random_in_unit_disk();
         vec3 offset = u * rd.x() + v * rd.y();
 
-        return ray(origin_ + offset, lower_left_corner_ + s * horizontal_ + t * vertical_ - origin_ - offset);
+        return ray(
+            origin_ + offset,
+            lower_left_corner_ + s * horizontal_ + t * vertical_ - origin_ - offset,
+            random_double(time0, time1)
+        );
     }
 
 private:
